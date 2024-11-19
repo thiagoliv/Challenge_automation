@@ -1,0 +1,19 @@
+name: Teste de Carga com K6
+
+on:
+  push:
+    branches:
+      - master  # ou a branch que você está usando
+
+jobs:
+  load-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checar o código
+        uses: actions/checkout@v2
+
+      - name: Executar teste de carga com K6
+        run: |
+          echo "Executando o teste de carga com K6..."
+          docker run --rm -v ${{ github.workspace }}:/scripts loadimpact/k6 run /scripts/load_tests/load_test.js
